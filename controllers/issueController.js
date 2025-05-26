@@ -1,6 +1,16 @@
 let Issue = require('../models/issue');
 const { producer } = require('../kafka/kafkaConfig');
 
+
+const hiCheck = async (req, res) => {
+    try {
+        res.status(200).json({ message: "Hi, your app is running!" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
 // create issue
 const createIssue = async (req, res) => {
     const { UserId, studentName, studentEmail, studentRegistrationNo, studentFaculty, studentCampus, 
@@ -253,4 +263,4 @@ const updateIssuePriority = async (req, res) => {
     }
 };
 
-module.exports = { createIssue, getAllIssuesByUserId, getAllIssues, updateIssue, deleteIssue, searchIssue, updateIssueStatus, resolveIssue, updateIssuePriority };
+module.exports = { hiCheck, createIssue, getAllIssuesByUserId, getAllIssues, updateIssue, deleteIssue, searchIssue, updateIssueStatus, resolveIssue, updateIssuePriority };

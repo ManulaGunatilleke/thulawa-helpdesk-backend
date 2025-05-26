@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const { isAdmin, isStudent, isAdminORStudent } = require('../middleware/authenticateRoleBase');
-const { createIssue, getAllIssuesByUserId, getAllIssues, updateIssue, 
+const { hiCheck, createIssue, getAllIssuesByUserId, getAllIssues, updateIssue, 
     deleteIssue, searchIssue, updateIssueStatus, resolveIssue, updateIssuePriority } = require('../controllers/issueController');
 
 // Student-only routes
+router.get('/health', hiCheck);
 router.post('/createIssue', createIssue); //create new issue
 router.get('/getAllIssuesByUserId/:id', isStudent, getAllIssuesByUserId); //view all issues by userId
 router.put('/updateIssue/:id', isAdminORStudent, updateIssue); //update an issue by id
